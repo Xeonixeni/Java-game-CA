@@ -4,27 +4,16 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.ImageIcon;
 
 public class Main
 {
-    public JFrame window;
-    public JButton One;
-    public JButton Two;
-    public JButton Three;
-    public JButton Four;
-    public JButton Five;
-    public JButton Six;
-    public JButton Seven;
-    public JButton Eight;
-    public JButton Nine;
-    public JButton Ten;
-    public JButton Eleven;
-    public JButton Twelve;
-    public JButton Thirteen;
-    public JButton Fourteen;
-    public JButton Fifteen;
-
-
+    public JFrame window;				 
+  
+	public final int Rows = 13;
+	public final int Colums = 9;
+	public JButton Buttons[][] = new JButton[Rows][Colums];
+	
         public void create()
         {
         window = new JFrame();
@@ -33,41 +22,38 @@ public class Main
         window.setSize(400 , 400);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
-        One = new JButton();
-        Two = new JButton();
-        Three = new JButton();
-        Five  = new JButton();
-        Four = new JButton();
-            Six = new JButton();
-            Seven = new JButton();
-            Eight = new JButton();
-            Nine = new JButton();
-            Ten = new JButton();
-            Eleven = new JButton();
-            Twelve = new JButton();
-            Thirteen = new JButton();
-            Fourteen = new JButton();
-            Fifteen = new JButton();
+		//Add 13 rows and 9 colums of buttons to create the basic GUI.
+		for(int i=0;i<Rows;i++)
+		{
+			for(int j = 0; j<Colums; j++)
+			{
+				
+				if(i == 0)
+				{
+					Buttons[i][j] = new JButton(new ImageIcon("bank2.jpg"));
+				}
+				else if(i == 12)
+				{
+					Buttons[i][j] = new JButton(new ImageIcon("bank1.jpg"));
+				}
+				else
+				{
+					Buttons[i][j] = new JButton(new ImageIcon("water1.jpg"));
+				}					
+				Buttons[i][j].setPreferredSize(new Dimension(32, 32));
+			    Buttons[i][j].setMinimumSize(new Dimension(32, 32));
+				Buttons[i][j].setMaximumSize(new Dimension(32, 32));
+				Buttons[i][j].setSize(32, 32);
+				Buttons[i][j].revalidate();
+				panel.add(Buttons[i][j]); 
+			}
 
-        panel.add(One);
-        panel.add(Two);
-        panel.add(Three);
-        panel.add(Four);
-        panel.add(Five);
-        panel.add(Six);
-            panel.add(Seven);
-            panel.add(Eight);
-            panel.add(Nine);
-            panel.add(Ten);
-            panel.add(Eleven);
-            panel.add(Twelve);
-            panel.add(Thirteen);
-            panel.add(Fourteen);
-            panel.add(Fifteen);
-
-            window.setContentPane(panel);
-        window.setLayout(new GridLayout(5, 3));
-        //window.pack();
+		}
+			
+			
+        window.setContentPane(panel);
+		window.setLayout(new GridLayout(13, 9));
+        window.pack();
 
 
 
