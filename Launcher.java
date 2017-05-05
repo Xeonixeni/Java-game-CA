@@ -7,5 +7,6 @@ public class Launcher
     {
         Main Launch = new Main();
         Launch.create();
+		Launch.level1();
     }
 }
