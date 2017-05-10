@@ -18,6 +18,7 @@ public class Main implements ActionListener
 	public int Xloc = 0;
 	public int Yloc = 0;
 	public String[][] buttonIcons = new String [Rows][Colums];
+	public String[] inv = new string [10]
         public void create()
         {
         window = new JFrame();
@@ -35,24 +36,28 @@ public class Main implements ActionListener
 				if(i == 0)
 				{
 					Buttons[i][j] = new JButton(new ImageIcon("bank2.jpg"));
-					Buttons[i][j].addActionListener(this);
+					buttonIcons[i][j] = "bank2.jpg";
 				}
 				else if(i == 12)
 				{
 					Buttons[i][j] = new JButton(new ImageIcon("bank1.jpg"));
-					Buttons[i][j].addActionListener(this);
+					buttonIcons[i][j] = "bank1.jpg";
+					
 				}
 				else
 				{
 					Buttons[i][j] = new JButton(new ImageIcon("water1.jpg"));
-					Buttons[i][j].addActionListener(this);
+					buttonIcons[i][j] = "water1.jpg";
+				
 				}					
 				Buttons[i][j].setPreferredSize(new Dimension(32, 32));
+				Buttons[i][j].addActionListener(this);
 			    Buttons[i][j].setMinimumSize(new Dimension(32, 32));
 				Buttons[i][j].setMaximumSize(new Dimension(32, 32));
 				Buttons[i][j].setSize(32, 32);
 				Buttons[i][j].revalidate();
 				panel.add(Buttons[i][j]); 
+				
 			}
 			
 		}
@@ -64,108 +69,22 @@ public class Main implements ActionListener
     }
 	public void level1()
 	{
-		panel.removeAll();
-		Random rand = new Random();
-		int n = rand.nextInt(11 - 8 + 1) + 8;
-		s = rand.nextInt(9);
-		int stumpLim = 0;		
-		for(int i=0;i<Rows;i++)
-		{
-			int q = rand.nextInt(9); 
-			for(int j = 0; j<Colums; j++)
-			{
-				int stumpLoc1 = rand.nextInt(15);
-				int stumpLoc2 = rand.nextInt(15);
-				if(i == 0)
-				{
-					if(j == s)
-					{
-						Buttons[i][j] = new JButton(new ImageIcon("stump3.jpg"));
-						buttonIcons[i][j] = "stump3.jpg";
-					}
-					else
-					{
-						Buttons[i][j] = new JButton(new ImageIcon("bank2.jpg"));
-						buttonIcons[i][j] = "bank2.jpg";
-					}
-					
-				}
-				else if(i == 12)
-				{
-					if(j == s)
-					{
-						Buttons[i][j] = new JButton(new ImageIcon("stump2_man.jpg"));
-						Xloc = j;
-						Yloc = i;
-						buttonIcons[i][j] = "stump2_man.jpg";
-					}
-					else
-					{
-						Buttons[i][j] = new JButton(new ImageIcon("bank1.jpg"));
-						buttonIcons[i][j] = "bank1.jpg";
-					}
-				}
-				else 
-				{	
-					if (i == n)
-					{
-						if(j == s)
-						{
-							Buttons[i][j] = new JButton(new ImageIcon("stump1.jpg"));
-							buttonIcons[i][j] = "stump1.jpg";
-						}
-				
-					}
-					else if( i > n)
-					{
-						if (j == s)
-						{
-							Buttons[i][j] = new JButton(new ImageIcon("Plank2.jpg"));
-							buttonIcons[i][j] = "Plank2.jpg";
-						}
-						
-					}
-					else
-					{
-						{
-						if( j == stumpLoc1)
-						{
-							Buttons[i][j] = new JButton(new ImageIcon("stump1.jpg"));
-							stumpLim++;
-							buttonIcons[i][j] = "stump1.jpg";
-						}
-						else if(j == stumpLoc2)	
-						{
-							Buttons[i][j] = new JButton(new ImageIcon("stump1.jpg"));
-							stumpLim++;
-							buttonIcons[i][j] = "stump1.jpg";
-						}
-						else 
-						{
-							Buttons[i][j] = new JButton(new ImageIcon("water1.jpg"));
-							buttonIcons[i][j] = "water1.jpg";
-						}
-						}
-					}
-				}
-			
-					
-				
-				Buttons[i][j].addActionListener(this);
-				Buttons[i][j].setPreferredSize(new Dimension(32, 32));
-			    Buttons[i][j].setMinimumSize(new Dimension(32, 32));
-				Buttons[i][j].setMaximumSize(new Dimension(32, 32));
-				Buttons[i][j].setSize(32, 32);
-				Buttons[i][j].revalidate();
-				panel.add(Buttons[i][j]); 
-			}
-
-		}
-		window.setContentPane(panel);
-		window.setLayout(new GridLayout(13, 9));
-        window.pack();
-		System.out.println(Xloc + "  " + Yloc);
-		check();
+		Buttons[12][2].setIcon(new ImageIcon("stump2_man.jpg"));
+		buttonIcons[12][2] = "stump2_man.jpg";
+		Xloc = 2;
+		Yloc = 12;
+		Buttons[11][2].setIcon(new ImageIcon("plank2.jpg"));
+		buttonIcons[11][2] = "plank2.jpg";
+		Buttons[10][2].setIcon(new ImageIcon("plank2.jpg"));
+		buttonIcons[10][2] = "plank2.jpg";
+		Buttons[9][2].setIcon(new ImageIcon("stump1.jpg"));
+		buttonIcons[9][2] = "stump1.jpg";
+		Buttons[6][2].setIcon(new ImageIcon("stump1.jpg"));
+		buttonIcons[6][2] = "stump1.jpg";
+		Buttons[3][2].setIcon(new ImageIcon("stump1.jpg"));
+		buttonIcons[3][2] = "stump1.jpg";
+		Buttons[0][2].setIcon(new ImageIcon("stump3.jpg"));
+		buttonIcons[0][2] = "stump3.jpg";
 		
 	}
 	
@@ -191,7 +110,7 @@ public class Main implements ActionListener
 	public void actionPerformed(ActionEvent e) 
 	{
 		String btnType = "";
-		
+		String btnType2 = "";
 		
 		for(int i=0;i<Rows;i++)
 		{
@@ -199,35 +118,75 @@ public class Main implements ActionListener
 			{
 				if (e.getSource() == Buttons[i][j])
 				{
-					btnType = buttonIcons[i][j];	//Needs more work to be 100% - also to do with other areas
-					buttonIcons[i][j] = buttonIcons[Yloc][Xloc];
-					buttonIcons[Yloc][Xloc] = btnType;
-					animate();
+					if(buttonIcons[i][j] == "water1.jpg")
+					{
+						System.out.println("Cannot move into water"); 
+					}
+					
+					else if(Yloc == i + 1)
+					{
+						if(Xloc == j)
+						{
+							buttonIcons[i][j] = buttonIcons[i][j].replace(".jpg", "");
+							buttonIcons[i][j] = buttonIcons[i][j] + "_man.jpg";
+							Buttons[i][j].setIcon(new ImageIcon(buttonIcons[i][j]));
+							buttonIcons[Yloc][Xloc] = buttonIcons[Yloc][Xloc].replace("_man.jpg", "");
+							buttonIcons[Yloc][Xloc] = buttonIcons[Yloc][Xloc] + ".jpg";
+							
+							Buttons[Yloc][Xloc].setIcon(new ImageIcon(buttonIcons[Yloc][Xloc])); 
+							Xloc = j;
+							Yloc = i;
+						}
+					}
+					else if(Yloc == i - 1)
+					{
+						if(Xloc == j)
+						{
+							buttonIcons[i][j] = buttonIcons[i][j].replace(".jpg", "");
+							buttonIcons[i][j] = buttonIcons[i][j] + "_man.jpg";
+							Buttons[i][j].setIcon(new ImageIcon(buttonIcons[i][j]));
+							buttonIcons[Yloc][Xloc] = buttonIcons[Yloc][Xloc].replace("_man.jpg", "");
+							buttonIcons[Yloc][Xloc] = buttonIcons[Yloc][Xloc] + ".jpg";
+							
+							Buttons[Yloc][Xloc].setIcon(new ImageIcon(buttonIcons[Yloc][Xloc])); 
+							Xloc = j;
+							Yloc = i;
+						}
+					}
+					else if(Xloc == j + 1)
+					{
+						if(Yloc == i)
+						{
+							buttonIcons[i][j] = buttonIcons[i][j].replace(".jpg", "");
+							buttonIcons[i][j] = buttonIcons[i][j] + "_man.jpg";
+							Buttons[i][j].setIcon(new ImageIcon(buttonIcons[i][j]));
+							buttonIcons[Yloc][Xloc] =buttonIcons[Yloc][Xloc].replace("_man.jpg", "");
+							buttonIcons[Yloc][Xloc] = buttonIcons[Yloc][Xloc] + ".jpg";
+							
+							Buttons[Yloc][Xloc].setIcon(new ImageIcon(buttonIcons[Yloc][Xloc])); 
+							Xloc = j;
+							Yloc = i;
+						}
+					}
+					else if(Xloc == j - 1)
+					{
+						if(Yloc == i)
+						{
+							buttonIcons[i][j] = buttonIcons[i][j].replace(".jpg", "");
+							buttonIcons[i][j] = buttonIcons[i][j] + "_man.jpg";
+							Buttons[i][j].setIcon(new ImageIcon(buttonIcons[i][j]));
+							buttonIcons[Yloc][Xloc] = buttonIcons[Yloc][Xloc].replace("_man.jpg", "");
+							buttonIcons[Yloc][Xloc] = buttonIcons[Yloc][Xloc] + ".jpg";
+							
+							Buttons[Yloc][Xloc].setIcon(new ImageIcon(buttonIcons[Yloc][Xloc])); 
+							Xloc = j;
+							Yloc = i;
+						}
+					}
 				}	
 			}
 		
 		}
-	}
-	public void animate()
-	{
-		panel.removeAll();
-		for(int i=0;i<Rows;i++)
-		{
-			for(int j = 0; j<Colums; j++)
-			{
-				Buttons[i][j] = new JButton(new ImageIcon(buttonIcons[i][j]));
-				Buttons[i][j].addActionListener(this);
-				Buttons[i][j].setPreferredSize(new Dimension(32, 32));
-			    Buttons[i][j].setMinimumSize(new Dimension(32, 32));
-				Buttons[i][j].setMaximumSize(new Dimension(32, 32));
-				Buttons[i][j].setSize(32, 32);
-				Buttons[i][j].revalidate();
-				panel.add(Buttons[i][j]); 
-			}
-		}
-		window.setContentPane(panel);
-		window.setLayout(new GridLayout(13, 9));
-        window.pack();
 	}
 
 	
